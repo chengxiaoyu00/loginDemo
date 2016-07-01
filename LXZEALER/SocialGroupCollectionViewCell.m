@@ -18,7 +18,7 @@
 
 - (void)setImageForCellWithIndexpath:(NSIndexPath*)indexpath{
     
-    NSString *imageName = [NSString stringWithFormat:@"group%ld.jpg",indexpath.row + 1];
+    NSString *imageName = [NSString stringWithFormat:@"group%d.jpg",indexpath.row + 1];
     self.groupImageView.image = [UIImage imageNamed:imageName];
     
     self.groupNameLabel.text = _nameArray[indexpath.row];

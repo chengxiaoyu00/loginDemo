@@ -18,7 +18,7 @@
     [super viewDidLoad];
     NSString *path = [[NSBundle mainBundle] pathForResource:@"Declaration.txt" ofType:nil];
     NSString *contentText = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-    NSLog(@"%@",contentText);
+//    NSLog(@"%@",contentText);
     
     self.textView.contentSize = CGSizeMake(self.view.bounds.size.width, 700);
     self.textView.text = contentText;

@@ -15,6 +15,9 @@
 
 @interface AboutZealerViewController ()
 
+@property (strong, nonatomic)  UITextView *aboutTextView;
+
+
 @end
 
 @implementation AboutZealerViewController
@@ -22,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"关于我们";
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, 650);
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.view.frame.size.height);
     [self initContentView];
    // [self initNavigationBar];
 }
@@ -62,19 +65,30 @@
 }
 
 - (void)initContentView{
-    UIImageView *aboutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 530)];
-    aboutImageView.image = [UIImage imageNamed:@"bg_about"];
-    aboutImageView.contentMode = UIViewContentModeScaleToFill;
-    [self.scrollView addSubview:aboutImageView];
+//    UIImageView *aboutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 530)];
+//    aboutImageView.image = [UIImage imageNamed:@"background"];
+//    aboutImageView.contentMode = UIViewContentModeScaleToFill;
+//    [self.scrollView addSubview:aboutImageView];
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"About.txt" ofType:nil];
+    NSString *contentText = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+        NSLog(@"%@",contentText);
+    self.aboutTextView = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height-300)];
+    
+//    self.aboutTextView.backgroundColor = [UIColor redColor];
+    self.aboutTextView.contentSize = CGSizeMake(self.view.bounds.size.width, 200);
+    self.aboutTextView.text = contentText;
+    
+    [self.scrollView addSubview:self.aboutTextView];
     
     UIButton *copyButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [copyButton setTitle:@"《免责声明及隐私政策》" forState:UIControlStateNormal];
     [copyButton addTarget:self action:@selector(copyButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    copyButton.frame = CGRectMake(0, 530, 200, 44);
+    copyButton.frame = CGRectMake(0, 250, 200, 44);
     [self.scrollView addSubview:copyButton];
     
     UIButton *logoutButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    logoutButton.frame = CGRectMake(20, 574, SCREEN_WIDTH - 40, 44);
+    logoutButton.frame = CGRectMake(20, 300, SCREEN_WIDTH - 40, 44);
     [logoutButton setTitle:@"退出登录" forState:UIControlStateNormal];
     [logoutButton addTarget:self action:@selector(logoutAction) forControlEvents:UIControlEventTouchUpInside];
     logoutButton.titleLabel.textAlignment = NSTextAlignmentCenter;

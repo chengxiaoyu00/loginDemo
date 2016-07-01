@@ -87,7 +87,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"选择了%ld个cell",indexPath.row);
+    NSLog(@"选择了%ld个cell",(long)indexPath.row);
 }
 - (IBAction)moreButtonAction:(UIButton *)sender {
     NSLog(@"more...");
